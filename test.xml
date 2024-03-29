@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="http://ufrn.br/soapproject/wsdl_generated">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:talkRequest>
+            <gs:message>aaaaa</gs:message>
+        </gs:talkRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
