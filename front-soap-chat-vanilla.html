@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .chat-container {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      #chat-box {
+        height: 300px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      #user-input {
+        width: calc(100% - 60px);
+        margin-right: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container">
+      <div id="chat-box"></div>
+      <input type="text" id="user-input" placeholder="Digite sua mensagem..." />
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+    <script>
+      function sendMessage() {
+        var userInput = document.getElementById("user-input").value;
+        var chatBox = document.getElementById("chat-box");
+
+        // Adiciona mensagem do usuário ao chat
+        var userMessage = document.createElement("div");
+        userMessage.textContent = "Você: " + userInput;
+        chatBox.appendChild(userMessage);
+
+        // Limpa a entrada do usuário
+        document.getElementById("user-input").value = "";
+
+        // Envia a mensagem do usuário ao servidor SOAP e recebe a resposta
+        sendSOAPRequest(userInput);
+      }
+
+      function sendSOAPRequest(userInput) {
+        // URL do servidor SOAP
+        var url = "http://localhost:8080/ws/chat.wsdl";
+
+        // Corpo da mensagem SOAP
+        var soapRequest = `<?xml version="1.0" encoding="UTF-8"?>
+                        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                        // xmlns:wsdl="http://ufrn.br/soapproject/wsdl_generated"
+                        >
+                           <soapenv:Header/>
+                           <soapenv:Body>
+                              <wsdl:talkRequest>
+                                 <message>${userInput}</message>
+                              </wsdl:talkRequest>
+                           </soapenv:Body>
+                        </soapenv:Envelope>`;
+
+        // Criação do objeto XMLHttpRequest para enviar a requisição SOAP
+        var xhr = new XMLHttpRequest();
+
+        // Definindo o tipo de requisição e a URL do servidor
+        xhr.open("POST", url, true);
+
+        // Definindo o cabeçalho da requisição SOAP
+        xhr.setRequestHeader("Content-Type", "text/xml");
+
+        // Função de callback que será chamada quando a resposta for recebida
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            // Manipula a resposta recebida do servidor aqui
+            var response = xhr.responseText;
+
+            // Adiciona a resposta do chatbot ao chat
+            var botMessage = document.createElement("div");
+            botMessage.textContent = "Chatbot: " + response;
+            chatBox.appendChild(botMessage);
+          }
+        };
+
+        // Enviando a requisição SOAP para o servidor
+        xhr.send(soapRequest);
+      }
+    </script>
+  </body>
+</html>
