@@ -20,7 +20,7 @@ public class ChatEndpoint {
         this.chatRepository = chatRepository;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getChatRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "talkRequest")
     @ResponsePayload
     public TalkResponse answer(@RequestPayload TalkRequest request) {
         TalkResponse response = new TalkResponse();
