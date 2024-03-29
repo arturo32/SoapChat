@@ -31,11 +31,9 @@ public class ChatRepository {
 
     @PostConstruct
     public void initData() {
-        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLAAAAAAAAAAAAAAAAAAAAAAAAAA");
         bot = configureBot();
         chat = new Chat(bot);
         bot.brain.nodeStats();
-
     }
 
     public String answer(String message) {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="3.0" xmlns="https://jakarta.ee/xml/ns/jaxb">
+  <!--
+
+Este arquivo foi gerado pela Eclipse Implementation of JAXB, v3.0.0 
+Consulte https://eclipse-ee4j.github.io/jaxb-ri 
+Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
+Gerado em: 2024.03.28 às 08:57:50 PM BRT 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://ufrn.br/soapproject">
+    <schemaBindings map="false">
+      <package name="br.ufrn.soapproject"/>
+    </schemaBindings>
+    <bindings scd="tns:talkRequest">
+      <class ref="br.ufrn.soapproject.TalkRequest"/>
+    </bindings>
+    <bindings scd="tns:talkResponse">
+      <class ref="br.ufrn.soapproject.TalkResponse"/>
+    </bindings>
+  </bindings>
+</bindings>
+

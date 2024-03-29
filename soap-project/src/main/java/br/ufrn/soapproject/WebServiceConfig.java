@@ -28,13 +28,13 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("ChatPort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
+        wsdl11Definition.setTargetNamespace("http://ufrn.br/soapproject/wsdl_generated");
         wsdl11Definition.setSchema(chatSchema);
         return wsdl11Definition;
     }
 
     @Bean
     public XsdSchema chatSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("chat.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("templates/chat.xsd"));
     }
 }
